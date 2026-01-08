@@ -28,8 +28,8 @@ class Location:
     timezone: str
 
 # TODO: Modify this location as desired
-# location = Location(name="San Francisco, CA", latitude=37.7749, longitude=-122.4194, timezone="America/Los_Angeles"),
-location = Location(name="New York, NY", latitude=40.7128, longitude=-74.0060, timezone="America/New_York"),
+# location = Location(name="San Francisco, CA", latitude=37.7749, longitude=-122.4194, timezone="America/Los_Angeles")
+location = Location(name="New York, NY", latitude=40.7128, longitude=-74.0060, timezone="America/New_York")
 
 def daterange(start_date: date, end_date: date) -> Iterable[date]:
     """Yield dates from start_date to end_date inclusive."""
