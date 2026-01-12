@@ -43,7 +43,7 @@ def compute_sun_times(loc: Location, for_date: date):
 
 def make_calendar(location: Location, start_date: date, end_date: date) -> Calendar:
     cal = Calendar()
-    for single_date in daterange(start_date, end_date):
+    for row_num, single_date in enumerate(daterange(start_date, end_date), start=1):
         try:
             sunrise_dt, sunset_dt = compute_sun_times(location, single_date)
         except Exception as e:  # pragma: no cover
@@ -59,10 +59,16 @@ def make_calendar(location: Location, start_date: date, end_date: date) -> Calen
         hrs, rem = divmod(int(daylight.total_seconds()), 3600)
         mins, secs = divmod(rem, 60)
         daylight_str = f"{hrs}:{mins:02d}:{secs:02d}"
-        ev.description = (
-            f"Sunset at {sunset_dt.isoformat()} for {location.name} — "
-            f"Sunrise at {sunrise_dt.isoformat()} (daylight {daylight_str})"
-        )
+        # human-friendly, multi-line description
+        desc_lines = [
+            f"Daylight: {daylight_str}",
+            f"Sunrise: {sunrise_dt.strftime('%H:%M:%S %Z')}",
+            f"Sunset: {sunset_dt.strftime('%H:%M:%S %Z')}",
+            f"Location: {location.name} ({location.latitude}, {location.longitude})",
+        ]
+        ev.description = "\n".join(desc_lines)
+        if row_num == 1:
+            print(f"Sample event description:\n{ev.description}\n")
         cal.events.add(ev)
     return cal
 
@@ -70,7 +76,7 @@ def make_calendar(location: Location, start_date: date, end_date: date) -> Calen
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate sunset events for a full year")
     year_default = datetime.now().year
-    parser.add_argument("--year", type=int, default=year_default, help=f"Year to generate events for (defaults to {year_default})")
+    parser.add_argument("--year", type=int, default=year_default, help=f"Year to generate events for (defaults to current year, {year_default})")
     parser.add_argument("--out", type=str, default="sunsets.ics", help="Output ICS path (default 'sunsets.ics')")
     # Location inputs (single location only)
     parser.add_argument("--name", type=str, default="New York, NY", help="Location name for event title (default 'New York, NY')")
