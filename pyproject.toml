@@ -1,12 +1,27 @@
+[build-system]
+# Tell uv/pip to use hatchling to build the package
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
 [project]
-name = "sunsets-py"
-version = "0.1.0"
+name = "sunsets"
+dynamic = ["version"]
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
     "astral>=2.2,<3",
     "ics>=0.7.2",
+]
+
+[tool.hatch.version]
+# This tells hatch to look at Git tags
+source = "vcs"
+
+[tool.hatch.build.targets.wheel]
+# This tells hatch to include the specific file from the root
+include = [
+    "sunsets.py",
 ]
 
 [dependency-groups]
