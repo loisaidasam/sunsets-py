@@ -1,2 +1,26 @@
+# uv / Virtual Environments
+.venv/
+.python-version
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / Build
+dist/
+build/
+*.egg-info/
+
+# Hatch/Testing caches
+.pytest_cache/
+.hatch/
+.ruff_cache/
+
+# OS specific
+.DS_Store
+
+# Project
 .venv
 *.ics
+
