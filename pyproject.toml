@@ -8,3 +8,8 @@ dependencies = [
     "astral>=2.2,<3",
     "ics>=0.7.2",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]
