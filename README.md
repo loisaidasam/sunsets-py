@@ -6,7 +6,7 @@ A python version of https://hilaryparker.com/2014/05/27/sunsets-in-google-calend
 
 ## Install
 
-```bash
+```shell
 uv sync
 ```
 
@@ -14,7 +14,7 @@ uv sync
 
 Generate an events file for the current year using the default location (New York, NY):
 
-```bash
+```shell
 $ uv run sunsets.py --help
 usage: sunsets.py [-h] [--year YEAR] [--out OUT] [--name NAME] [--lat LAT] [--lon LON] [--tz TZ]
 
@@ -45,6 +45,12 @@ DURATION:PT30M
 ## Notes
 - The script uses `astral` to compute sunrise/sunset times and `ics` to build a calendar file.
 - Event descriptions include the sunrise time and the daylight duration (sunset - sunrise) when available.
+
+## Run tests
+
+```shell
+$ uv run pytest
+```
 
 ## License
 
